@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: schema-forge
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./out
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
