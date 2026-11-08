@@ -1,69 +1,81 @@
-import Image from "next/image";
+import type { Metadata } from "next";
+import BlueprintBackground from "@/components/BlueprintBackground";
+import Hero from "@/components/Hero";
+import SchemaForge from "@/components/SchemaForge";
+import GlitchCodeRain from "@/components/GlitchCodeRain";
+import { Zap, ShieldCheck, ClipboardPaste, Braces } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Schema Forge — Generador de JSON-LD SEO",
+  description:
+    "Generador interactivo de JSON-LD Schema Markup. Completá un formulario y obtené código listo para Google Rich Results: Organization, Product, Recipe, LocalBusiness y FAQ.",
+};
+
+const FEATURES = [
+  {
+    icon: Zap,
+    title: "Renderizado en vivo",
+    text: "Cada tecla actualiza el JSON-LD al instante. Sin esperas, sin recargas.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Validación inteligente",
+    text: "Los campos que Google exige se marcan en ámbar hasta que el schema esté completo.",
+  },
+  {
+    icon: ClipboardPaste,
+    title: "Un clic y listo",
+    text: "Copiá el bloque <script> completo y pegalo en el head de tu sitio. Producción.",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <div className="relative flex min-h-full flex-1 flex-col">
+      <BlueprintBackground />
+      <Hero />
+      <SchemaForge />
+
+      {/* Features */}
+      <section id="features" className="relative z-10 px-4 pb-28 sm:px-6 lg:px-8">
+        <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
+          {FEATURES.map((f) => (
+            <div key={f.title} className="glass rounded-3xl p-6">
+              <div className="neu-pressed mb-4 flex h-11 w-11 items-center justify-center rounded-xl">
+                <f.icon size={19} className="text-cyan-300" />
+              </div>
+              <h3 className="mb-2 font-semibold text-white">{f.title}</h3>
+              <p className="text-sm leading-relaxed text-slate-400">{f.text}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Footer con glitch de código */}
+      <footer className="relative z-10 mt-auto overflow-hidden border-t border-white/5 px-4 pb-16 pt-24">
+        <GlitchCodeRain />
+        <div className="relative mx-auto max-w-3xl text-center">
+          <div className="neu-pressed mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-2xl">
+            <Braces size={20} className="text-cyan-300" />
+          </div>
+          <h2 className="text-2xl font-bold text-white sm:text-3xl">
+            Tu sitio merece rich results
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-slate-400">
+            JSON-LD correcto = más CTR en Google. Generá el tuyo en segundos.
+          </p>
+          <a
+            href="#forge"
+            className="neu-btn neu-btn-active mt-6 inline-flex items-center gap-2 rounded-2xl px-7 py-3 text-sm font-semibold"
+          >
+            <Braces size={15} />
+            Volver al generador
+          </a>
+          <p className="mt-10 text-[11px] uppercase tracking-[0.25em] text-slate-600">
+            Schema Forge · Estructura para producción
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </footer>
     </div>
   );
 }

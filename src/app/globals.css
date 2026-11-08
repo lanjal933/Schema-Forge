@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-ink-950: #04060c;
+  --color-ink-900: #0a0f1e;
+  --color-ink-800: #111827;
+  --color-neon-300: #67e8f9;
+  --color-neon-400: #22d3ee;
+  --color-neon-500: #06b6d4;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #04060c;
+  --foreground: #e2e8f0;
 }
 
 @theme inline {
@@ -12,15 +23,170 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.35);
+  color: #fff;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f1e;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #164e63, #0e7490);
+  border-radius: 8px;
+  border: 2px solid #0a0f1e;
+}
+
+/* ---------- Glassmorphism ---------- */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.02) 55%,
+    rgba(34, 211, 238, 0.05)
+  );
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.glass-deep {
+  background: linear-gradient(
+    160deg,
+    rgba(10, 15, 30, 0.85),
+    rgba(10, 15, 30, 0.55)
+  );
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ---------- Neumorphism (dark) ---------- */
+.neu-raised {
+  background: linear-gradient(145deg, #101828, #0b1120);
+  box-shadow:
+    8px 8px 18px rgba(0, 0, 0, 0.55),
+    -6px -6px 16px rgba(255, 255, 255, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.neu-pressed {
+  background: linear-gradient(145deg, #0b1120, #0e1628);
+  box-shadow:
+    inset 6px 6px 14px rgba(0, 0, 0, 0.6),
+    inset -5px -5px 12px rgba(255, 255, 255, 0.035),
+    0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+.neu-input {
+  background: linear-gradient(145deg, #0d1526, #0a0f1e);
+  box-shadow:
+    inset 5px 5px 12px rgba(0, 0, 0, 0.6),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.03);
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.neu-input:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.35);
+  box-shadow:
+    inset 5px 5px 12px rgba(0, 0, 0, 0.6),
+    inset -4px -4px 10px rgba(255, 255, 255, 0.03),
+    0 0 0 3px rgba(34, 211, 238, 0.12),
+    0 0 18px rgba(34, 211, 238, 0.12);
+}
+
+.neu-btn {
+  background: linear-gradient(145deg, #131c30, #0d1424);
+  box-shadow:
+    6px 6px 14px rgba(0, 0, 0, 0.55),
+    -4px -4px 12px rgba(255, 255, 255, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.1s ease,
+    background 0.2s ease;
+}
+
+.neu-btn:hover {
+  background: linear-gradient(145deg, #182540, #101a2e);
+}
+
+.neu-btn:active,
+.neu-btn[data-pressed="true"] {
+  box-shadow:
+    inset 4px 4px 10px rgba(0, 0, 0, 0.6),
+    inset -3px -3px 8px rgba(255, 255, 255, 0.03);
+  transform: translateY(1px);
+}
+
+.neu-btn-active {
+  background: linear-gradient(145deg, #0e7490, #155e75);
+  box-shadow:
+    inset 4px 4px 10px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(34, 211, 238, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  color: #ecfeff;
+}
+
+/* ---------- Blueprint grid ---------- */
+.blueprint-grid {
+  background-image:
+    linear-gradient(rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.07) 1px, transparent 1px),
+    linear-gradient(rgba(34, 211, 238, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.14) 1px, transparent 1px);
+  background-size:
+    24px 24px,
+    24px 24px,
+    120px 120px,
+    120px 120px;
+}
+
+/* ---------- Glitch flicker ---------- */
+@keyframes glitch-flicker {
+  0%, 100% { opacity: 1; }
+  92% { opacity: 1; }
+  93% { opacity: 0.4; }
+  94% { opacity: 1; }
+  96% { opacity: 0.6; }
+  97% { opacity: 1; }
+}
+
+.glitch-active {
+  animation: glitch-flicker 0.6s steps(2, end) infinite;
+}
+
+@keyframes pulse-warning {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+
+.warn-pulse {
+  animation: pulse-warning 1.6s ease-in-out infinite;
 }
